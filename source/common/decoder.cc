@@ -50,7 +50,7 @@
 
 #define TRACEFILE "trace_dec_HD.txt"  /* trace file in current directory */
 
-/* disable warning C4127: ��������ʽ�ǳ��� */
+/* disable warning C4127: 条件表达式是常量 */
 #pragma warning(disable:4127)
 
 
@@ -73,7 +73,7 @@ static void init_frame(davs2_t *h)
     h->i_slice_index       = -1;
     h->b_slice_checked     = 0;
     h->fdec->i_parsed_lcu_xy = -1;
-    h->decoding_error      = 0;    // �����������־
+    h->decoding_error      = 0;    // 清除解码错误标志
 
     /* 1, clear intra_mode buffer, set to default value (-1) */
     memset(h->p_ipredmode - h->i_ipredmode - 16, DC_PRED, h->i_ipredmode * (h->i_height_in_spu + 1) * sizeof(int8_t));
@@ -222,7 +222,7 @@ static davs2_outpic_t *get_one_free_picture(davs2_mgr_t *mgr, int w, int h)
 }
 
 /* ---------------------------------------------------------------------------
- * �ȴ�һ��LCU�ؽ�����ָ��������LCU
+ * 等待一行LCU熵解码完指定数量的LCU
  */
 static ALWAYS_INLINE
 void wait_lcu_row_parsed(davs2_t *h, davs2_frame_t *frm, int lcu_xy)
@@ -239,7 +239,7 @@ void wait_lcu_row_parsed(davs2_t *h, davs2_frame_t *frm, int lcu_xy)
 }
 
 /* ---------------------------------------------------------------------------
- * �ȴ�һ��LCU�����ع���ָ��������LCU
+ * 等待一行LCU解码重构完指定数量的LCU
  */
 static ALWAYS_INLINE
 void wait_lcu_row_reconed(davs2_t *h, davs2_frame_t *frm, int wait_lcu_y, int wait_lcu_coded)
@@ -363,7 +363,7 @@ int check_slice_header(davs2_t *h, davs2_bs_t *bs, int lcu_y)
         aec_start_decoding(p_aec, bs->p_stream, ((bs->i_bit_pos + 7) / 8), bs->i_stream);
         AEC_RETURN_ON_ERROR(-1);
 
-        /* ��ǰSlice����һ�е�Ԥ��ģʽ��� */
+        /* 当前Slice的上一行的预测模式清空 */
         lcu_y <<= (h->i_lcu_level - MIN_PU_SIZE_IN_BIT);
         memset(h->p_ipredmode + (lcu_y - 1) * h->i_ipredmode - 16, DC_PRED, h->i_ipredmode * sizeof(int8_t));
     }
@@ -960,7 +960,7 @@ void davs2_write_a_frame(davs2_picture_t *pic, davs2_frame_t *frame)
 
     if (!shift1 && sizeof(pel_t) == num_bytes_per_sample) {
         pic->dec_frame = frame;
-        // TODO: ���¸�ֵǰ��ָ����Ҫ���ʵ���ʱ�򣨽��������֧ʱ���ָ�
+        // TODO: 如下赋值前的指针需要在适当的时候（进入后续分支时）恢复
         pic->planes[0]  = frame->planes[0];
         pic->planes[1]  = frame->planes[1];
         pic->planes[2]  = frame->planes[2];

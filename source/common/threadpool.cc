@@ -293,7 +293,7 @@ void davs2_threadpool_run(davs2_threadpool_t *pool, davs2_threadpool_func_t func
 }
 
 /* ---------------------------------------------------------------------------
- * 查询线程池是否在空转
+ * 鏌ヨ绾跨▼姹犳槸鍚﹀湪绌鸿浆
  */
 int davs2_threadpool_is_free(davs2_threadpool_t *pool)
 {

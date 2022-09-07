@@ -277,7 +277,7 @@ static ALWAYS_INLINE int is_block_available(davs2_t *h, int x_4x4, int y_4x4, in
 static ALWAYS_INLINE
 uint32_t get_intra_neighbors(davs2_t *h, int x_4x4, int y_4x4, int bsx, int bsy, int cur_slice_idx)
 {
-    /* 1. ¼ì²éÏàÁÚ¿éÊÇ·ñÊôÓÚÍ¬Ò»¸öSlice */
+    /* 1. æ£€æŸ¥ç›¸é‚»å—æ˜¯å¦å±žäºŽåŒä¸€ä¸ªSlice */
     int b_LEFT      = is_block_available(h, x_4x4, y_4x4, -1, 0, cur_slice_idx);
     int b_TOP       = is_block_available(h, x_4x4, y_4x4,  0, -1, cur_slice_idx);
     int b_TOP_LEFT  = is_block_available(h, x_4x4, y_4x4, -1, -1, cur_slice_idx);
@@ -289,7 +289,7 @@ uint32_t get_intra_neighbors(davs2_t *h, int x_4x4, int y_4x4, int bsx, int bsy,
     int log2_lcu_size_in_spu = (h->i_lcu_level - B4X4_IN_BIT);
     int i_lcu_mask = (1 << log2_lcu_size_in_spu) - 1;
 
-    /* 2. ¼ì²éÏàÁÚ¿éÊÇ·ñÔÚµ±Ç°¿éÖ®Ç°ÖØ¹¹ */
+    /* 2. æ£€æŸ¥ç›¸é‚»å—æ˜¯å¦åœ¨å½“å‰å—ä¹‹å‰é‡æž„ */
     x_4x4 = x_4x4 & i_lcu_mask;
     y_4x4 = y_4x4 & i_lcu_mask;
 
@@ -2217,7 +2217,7 @@ static void intra_pred_ang_xy_23_c(pel_t *src, pel_t *dst, int i_dst, int dir_mo
 
 /* ---------------------------------------------------------------------------
  * fill reference samples for intra prediction
- * LCUÄÚÔÚÉÏ±ß½çµÄPU
+ * LCUå†…åœ¨ä¸Šè¾¹ç•Œçš„PU
  */
 static 
 void fill_reference_samples_0_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP, pel_t *EP, uint32_t i_avai, int bsx, int bsy)
@@ -2282,7 +2282,7 @@ void fill_reference_samples_0_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP,
 
 /* ---------------------------------------------------------------------------
  * fill reference samples for intra prediction
- * LCUÄÚÔÚÉÏ±ß½çµÄPU
+ * LCUå†…åœ¨ä¸Šè¾¹ç•Œçš„PU
  */
 static 
 void fill_reference_samples_x_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP, pel_t *EP, uint32_t i_avai, int bsx, int bsy)
@@ -2359,7 +2359,7 @@ void fill_reference_samples_x_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP,
 
 /* ---------------------------------------------------------------------------
  * fill reference samples for intra prediction
- * LCUÄÚÔÚ×ó±ß½çÉÏµÄPU
+ * LCUå†…åœ¨å·¦è¾¹ç•Œä¸Šçš„PU
  */
 static 
 void fill_reference_samples_y_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP, pel_t *EP, uint32_t i_avai, int bsx, int bsy)
@@ -2425,7 +2425,7 @@ void fill_reference_samples_y_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP,
 
 /* ---------------------------------------------------------------------------
  * fill reference samples for intra prediction
- * LCUÄÚ²»ÔÚ±ß½çÉÏµÄPU
+ * LCUå†…ä¸åœ¨è¾¹ç•Œä¸Šçš„PU
  */
 static 
 void fill_reference_samples_xy_c(const pel_t *pTL, int i_TL, const pel_t *pLcuEP, pel_t *EP, uint32_t i_avai, int bsx, int bsy)
@@ -2550,23 +2550,23 @@ void davs2_get_intra_pred_chroma(davs2_row_rec_t *row_rec, cu_t *p_cu, int ctu_c
     int real_mode   = (chroma_mode == DM_PRED_C) ? luma_mode : TAB_CHROMA_MODE_TO_REAL_MODE[chroma_mode];
     uint32_t avail;
 
-    /* Ô¤²â¿éÎ»ÖÃ */
+    /* é¢„æµ‹å—ä½ç½® */
     int i_pred      = row_rec->ctu.i_fdec[1];
     pel_t *p_pred_u = row_rec->ctu.p_fdec[1] + ctu_c_y * i_pred + ctu_c_x;
     pel_t *p_pred_v = row_rec->ctu.p_fdec[2] + ctu_c_y * i_pred + ctu_c_x;
 
-    /* ¼ÆËãU¡¢V·ÖÁ¿µÄ×óÉÏ½ÇÏñËØµãµÄÎ»ÖÃ */
+    /* è®¡ç®—Uã€Våˆ†é‡çš„å·¦ä¸Šè§’åƒç´ ç‚¹çš„ä½ç½® */
     int i_src       = i_pred;
     pel_t *pTL_u    = p_pred_u - i_src - 1;
     pel_t *pTL_v    = p_pred_v - i_src - 1;
 
-    /* ²Î¿¼±ß½ç¿ÉÓÃÐÔÅÐ¶ÏÓë²Î¿¼±ß½çÌî³ä */
+    /* å‚è€ƒè¾¹ç•Œå¯ç”¨æ€§åˆ¤æ–­ä¸Žå‚è€ƒè¾¹ç•Œå¡«å…… */
     avail = get_intra_neighbors(row_rec->h, b8_x, b8_y, bsize_c << 1, bsize_c << 1, p_cu->i_slice_nr);
 
     gf_davs2.fill_edge_f[xy](pTL_u, i_src, row_rec->ctu_border[1].rec_top + ctu_c_x - ctu_c_y, EP_u, avail, bsize_c, bsize_c);
     gf_davs2.fill_edge_f[xy](pTL_v, i_src, row_rec->ctu_border[2].rec_top + ctu_c_x - ctu_c_y, EP_v, avail, bsize_c, bsize_c);
 
-    /* Ö´ÐÐÔ¤²â */
+    /* æ‰§è¡Œé¢„æµ‹ */
     intra_pred(EP_u, p_pred_u, i_pred, real_mode, bsize_c, bsize_c, avail);
     intra_pred(EP_v, p_pred_v, i_pred, real_mode, bsize_c, bsize_c, avail);
 }

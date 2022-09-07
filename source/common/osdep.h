@@ -44,7 +44,7 @@ extern "C" {
 #define _CRT_NONSTDC_NO_DEPRECATE
 #define _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_WARNINGS
-#pragma warning(disable:4324)     /* disable warning C4324: 由于 __declspec(align())，结构被填充 */
+#pragma warning(disable:4324)     /* disable warning C4324: 鐢变簬 __declspec(align())锛岀粨鏋勮濉厖 */
 #endif
 
 /**

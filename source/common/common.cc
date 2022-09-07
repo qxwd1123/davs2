@@ -356,11 +356,11 @@ static ALWAYS_INLINE
 void davs2_set_font_color(int color)
 {
     static const WORD colors[] = {
-        FOREGROUND_INTENSITY | FOREGROUND_GREEN,                   // ÂÌÉ«
+        FOREGROUND_INTENSITY | FOREGROUND_GREEN,                   // ç»¿è‰²
         FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE, // cyan
-        FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN,  // »ÆÉ«
-        FOREGROUND_INTENSITY | FOREGROUND_RED,                     // ºìÉ«
-        FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE,   // ×ÏÉ«
+        FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN,  // é»„è‰²
+        FOREGROUND_INTENSITY | FOREGROUND_RED,                     // çº¢è‰²
+        FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE,   // ç´«è‰²
     };
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colors[color]);
 }

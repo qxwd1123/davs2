@@ -37,11 +37,11 @@ extern "C" {
 #endif
 
 /* ---------------------------------------------------------------------------
- * ¼ÆËã²Î¿¼Ö¡¾àÀëÊ±£¬¹é²¢µ½ÓĞĞ§·¶Î§ÄÚ */
+ * è®¡ç®—å‚è€ƒå¸§è·ç¦»æ—¶ï¼Œå½’å¹¶åˆ°æœ‰æ•ˆèŒƒå›´å†… */
 #define AVS2_DISTANCE_INDEX(distance)    (((distance) + 512) & 511)
 
 /* ---------------------------------------------------------------------------
- * ·µ»ØP/FÖ¡µÄ²Î¿¼Ö¡Óëµ±Ç°Ö¡Ö®¼äµÄ¾àÀë */
+ * è¿”å›P/Få¸§çš„å‚è€ƒå¸§ä¸å½“å‰å¸§ä¹‹é—´çš„è·ç¦» */
 static ALWAYS_INLINE
 int get_distance_index_p(davs2_t *h, int refidx)
 {
@@ -49,7 +49,7 @@ int get_distance_index_p(davs2_t *h, int refidx)
 }
 
 /* ---------------------------------------------------------------------------
-* ·µ»ØP/FÖ¡µÄ²Î¿¼Ö¡Óëµ±Ç°Ö¡Ö®¼äµÄ¾àÀë */
+* è¿”å›P/Få¸§çš„å‚è€ƒå¸§ä¸å½“å‰å¸§ä¹‹é—´çš„è·ç¦» */
 static ALWAYS_INLINE
 int get_distance_index_p_scale(davs2_t *h, int refidx)
 {
@@ -57,7 +57,7 @@ int get_distance_index_p_scale(davs2_t *h, int refidx)
 }
 
 /* ---------------------------------------------------------------------------
- * ·µ»ØBÖ¡µÄ²Î¿¼Ö¡Óëµ±Ç°Ö¡Ö®¼äµÄ¾àÀë */
+ * è¿”å›Bå¸§çš„å‚è€ƒå¸§ä¸å½“å‰å¸§ä¹‹é—´çš„è·ç¦» */
 static ALWAYS_INLINE
 int get_distance_index_b(davs2_t *h, int b_fwd)
 {
@@ -65,7 +65,7 @@ int get_distance_index_b(davs2_t *h, int b_fwd)
 }
 
 /* ---------------------------------------------------------------------------
-* ·µ»ØBÖ¡µÄ²Î¿¼Ö¡Óëµ±Ç°Ö¡Ö®¼äµÄ¾àÀë */
+* è¿”å›Bå¸§çš„å‚è€ƒå¸§ä¸å½“å‰å¸§ä¹‹é—´çš„è·ç¦» */
 static ALWAYS_INLINE
 int get_distance_index_b_scale(davs2_t *h, int b_fwd)
 {
@@ -73,7 +73,7 @@ int get_distance_index_b_scale(davs2_t *h, int b_fwd)
 }
 
 /* ---------------------------------------------------------------------------
-* ÓÃÓÚ³¡±àÂëÖĞY·ÖÁ¿Ëõ·ÅµÄÆ«ÖÃ */
+* ç”¨äºåœºç¼–ç ä¸­Yåˆ†é‡ç¼©æ”¾çš„åç½® */
 static ALWAYS_INLINE
 int getDeltas(davs2_t *h, int *delt, int *delt2, int OriPOC, int OriRefPOC, int ScaledPOC, int ScaledRefPOC)
 {

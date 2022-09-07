@@ -993,7 +993,7 @@ void davs2_dct_init(uint32_t cpuid, ao_funcs_t *fh)
         }
     }
 
-    /* TODO: ³õÊ¼»¯·ÇÄ¬ÈÏDCTÄ£°å */
+    /* TODO: åˆå§‹åŒ–éžé»˜è®¤DCTæ¨¡æ¿ */
     if (cpuid & DAVS2_CPU_SSE2) {
         /* square */
         fh->idct[PART_8x8  ][DCT_HALF] = idct_8x8_half_sse128;
@@ -1027,7 +1027,7 @@ void davs2_dct_init(uint32_t cpuid, ao_funcs_t *fh)
         fh->idct[PART_64x64][DCT_DEAULT] = idct_64x64_avx2;
         fh->idct[PART_64x16][DCT_DEAULT] = idct_64x16_avx2;
         fh->idct[PART_16x64][DCT_DEAULT] = idct_16x64_avx2;
-        fh->idct[PART_32x32][DCT_DEAULT] = idct_32x32_avx2;    // @luofl i7-6700k ËÙ¶È±Èsse128¿ìÒ»±¶
+        fh->idct[PART_32x32][DCT_DEAULT] = idct_32x32_avx2;    // @luofl i7-6700k é€Ÿåº¦æ¯”sse128å¿«ä¸€å€
 
         /* square */
         // fh->idct[PART_8x8  ][DCT_HALF] = idct_8x8_half_avx2;

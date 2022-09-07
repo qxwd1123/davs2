@@ -232,11 +232,11 @@ void output_list_recycle_picture(davs2_mgr_t *mgr, davs2_outpic_t *pic)
 static 
 int has_new_output_frame(davs2_mgr_t *mgr, davs2_t *h)
 {
-    // TODO: ´ýÍêÉÆ£¬È·¶¨µ±Ç°Í¼Ïñ½âÂëÍê±ÏºóÊÇ·ñÓ¦¸ÃµÈ´ýÊä³ö
+    // TODO: å¾…å®Œå–„ï¼Œç¡®å®šå½“å‰å›¾åƒè§£ç å®Œæ¯•åŽæ˜¯å¦åº”è¯¥ç­‰å¾…è¾“å‡º
     UNUSED_PARAMETER(mgr);
     UNUSED_PARAMETER(h);
 
-    return 1;  // ÓÐÍ¼ÏñÊä³ö·µ»Ø·ÇÁã£¬ÎÞÍ¼ÏñÊä³ö·µ»Ø0
+    return 1;  // æœ‰å›¾åƒè¾“å‡ºè¿”å›žéžé›¶ï¼Œæ— å›¾åƒè¾“å‡ºè¿”å›ž0
 }
 
 /* ---------------------------------------------------------------------------
@@ -262,8 +262,8 @@ davs2_outpic_t *output_list_get_one_output_picture(davs2_mgr_t *mgr)
             mgr->outpics.num_output_pic--;
             break;
         } else {
-            /* TODO: ÕâÀïÈÔÐèÒªÈ·ÈÏÒ»ÏÂÐÞ¸Ä·½Ê½ 
-             * ÈçºÎ±£Ö¤Êä³öË³ÐòµÄÓÐÐ§ÐÔ£¿ÐèÒªÔÚÊä³ö¶ÓÁÐÓÉ¶àÉÙÖ¡Ê±½øÐÐÊä³ö¡£
+            /* TODO: è¿™é‡Œä»éœ€è¦ç¡®è®¤ä¸€ä¸‹ä¿®æ”¹æ–¹å¼ 
+             * å¦‚ä½•ä¿è¯è¾“å‡ºé¡ºåºçš„æœ‰æ•ˆæ€§ï¼Ÿéœ€è¦åœ¨è¾“å‡ºé˜Ÿåˆ—ç”±å¤šå°‘å¸§æ—¶è¿›è¡Œè¾“å‡ºã€‚
              */
             if (frame->i_poc > mgr->outpics.output) {
                 /* the end of the stream occurs */
@@ -291,7 +291,7 @@ davs2_outpic_t *output_list_get_one_output_picture(davs2_mgr_t *mgr)
                 }
             }
 
-            /* Ä¿Ç°Êä³ö¶ÓÁÐµÄ×îÐ¡POCÓëÒÑÊä³öµÄPOCÖ®¼ä¼ä¸ô½Ï´ó£¬½«Êä³öPOCÌáÇ°µ½µ±Ç°×îÐ¡POC */
+            /* ç›®å‰è¾“å‡ºé˜Ÿåˆ—çš„æœ€å°POCä¸Žå·²è¾“å‡ºçš„POCä¹‹é—´é—´éš”è¾ƒå¤§ï¼Œå°†è¾“å‡ºPOCæå‰åˆ°å½“å‰æœ€å°POC */
             davs2_log(mgr, DAVS2_LOG_WARNING, "Advance to discontinuous POC: %d\n", frame->i_poc);
             mgr->outpics.output = frame->i_poc;
         }
@@ -536,7 +536,7 @@ davs2_decoder_open(davs2_param_t *param)
         goto fail;
     }
 
-    /* Ïß³ÌÊýÁ¿ÅäÖÃ²ÎÊý */
+    /* çº¿ç¨‹æ•°é‡é…ç½®å‚æ•° */
     if (mgr->num_total_thread < 1 || mgr->num_decoders < mgr->num_aec_thread ||
         mgr->num_rec_thread < 0 ||
         mgr->num_aec_thread < 1 || mgr->num_aec_thread > mgr->num_total_thread) {

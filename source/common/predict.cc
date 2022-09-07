@@ -547,7 +547,7 @@ static void fill_mv_bskip(davs2_t *h, cu_t *p_cu, int pix_x, int pix_y, int size
             p_mv_2nd  += width_in_spu;
             p_dirpred += width_in_spu;
         }
-    } else {   //    B_Skip_Sym »ò B_Direct_Sym
+    } else {   //    B_Skip_Sym æˆ– B_Direct_Sym
         int size_cu = size_in_scu << MIN_CU_SIZE_IN_BIT;
         int size_pu = size_cu >> (int)(p_cu->num_pu == 4);
         int size_pu_in_spu = size_pu >> MIN_PU_SIZE_IN_BIT;
@@ -604,12 +604,12 @@ static void fill_mv_bskip(davs2_t *h, cu_t *p_cu, int pix_x, int pix_y, int size
                 p_dirpred += width_in_spu;
             }
         }     // for loop all PUs
-    }   //    B_Skip_Sym »ò B_Direct_Sym
+    }   //    B_Skip_Sym æˆ– B_Direct_Sym
 }
 
 /* ---------------------------------------------------------------------------
- * ÔÚSkip/Direct»®·ÖÄ£Ê½ÏÂ£¬ÀûÓÃÏàÁÚ¿éÔË¶¯ĞÅÏ¢ÉèÖÃµ±Ç°CUÄÚËùÓĞ¿éµÄÔË¶¯ĞÅÏ¢
- * °üÀ¨ÉèÖÃ²Î¿¼Ö¡Ë÷ÒıºÍÔË¶¯Ê¸Á¿
+ * åœ¨Skip/Directåˆ’åˆ†æ¨¡å¼ä¸‹ï¼Œåˆ©ç”¨ç›¸é‚»å—è¿åŠ¨ä¿¡æ¯è®¾ç½®å½“å‰CUå†…æ‰€æœ‰å—çš„è¿åŠ¨ä¿¡æ¯
+ * åŒ…æ‹¬è®¾ç½®å‚è€ƒå¸§ç´¢å¼•å’Œè¿åŠ¨çŸ¢é‡
  */
 void fill_mv_and_ref_for_skip(davs2_t *h, cu_t *p_cu, int pix_x, int pix_y, int size_in_scu)
 {

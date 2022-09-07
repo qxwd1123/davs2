@@ -208,7 +208,7 @@ intpl_chroma_block_ver_c(pel_t *dst, int i_dst, pel_t *src, int i_src, int width
 static void
 intpl_chroma_block_ext_c(pel_t *dst, int i_dst, pel_t *src, int i_src, int width, int height, const int8_t *coeff_h, const int8_t *coeff_v)
 {
-    // TODO: ÓëlumaÍ³Ò»Êý¾ÝÀàÐÍ
+    // TODO: ä¸Žlumaç»Ÿä¸€æ•°æ®ç±»åž‹
     ALIGN16(int32_t tmp_res[(32 + 3) * 32]);
     int32_t *tmp = tmp_res;
     const int shift1 = g_bit_depth - 8;
@@ -706,8 +706,8 @@ void davs2_mc_init(uint32_t cpuid, ao_funcs_t *pf)
         pf->intpl_luma_hor[0][2] = intpl_luma_block_hor_sse128;
         pf->intpl_luma_ext[0] = intpl_luma_block_ext_sse128;
 
-        /*Á½¸ö²îÖµº¯ÊýÓÐ²»Æ¥ÅäÎÊÌâ¡£
-          ÐÞ¸ÄÊ±Çë×¢Òâ¹Ø±Õavx2»ã±àº¯Êý¡£
+        /*ä¸¤ä¸ªå·®å€¼å‡½æ•°æœ‰ä¸åŒ¹é…é—®é¢˜ã€‚
+          ä¿®æ”¹æ—¶è¯·æ³¨æ„å…³é—­avx2æ±‡ç¼–å‡½æ•°ã€‚
          */
         //pf->intpl_chroma_ver[0] = intpl_chroma_block_ver_sse128;
         pf->intpl_chroma_hor[0] = intpl_chroma_block_hor_sse128;

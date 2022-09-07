@@ -90,7 +90,7 @@ ALIGN16(extern const int8_t tab_coeff_mode_11[64][16]);
 
 
 #if _MSC_VER
-//Ìí¼Óºê¶¨Òå  ½â¾öµ±Ç°immintrin.hÖĞÃ»ÓĞ¶¨ÒåÕâĞ©º¯ÊıµÄÎÊÌâ      zhangjiaqi 2016-12-02
+//æ·»åŠ å®å®šä¹‰  è§£å†³å½“å‰immintrin.hä¸­æ²¡æœ‰å®šä¹‰è¿™äº›å‡½æ•°çš„é—®é¢˜      zhangjiaqi 2016-12-02
 #define _mm256_extract_epi64(a, i) (a.m256i_i64[i])
 #define _mm256_extract_epi32(a, i) (a.m256i_i32[i])
 #define _mm256_extract_epi16(a, i) (a.m256i_i16[i])
@@ -98,7 +98,7 @@ ALIGN16(extern const int8_t tab_coeff_mode_11[64][16]);
 #define _mm256_insert_epi64(a, v, i) (a.m256i_i64[i] = v)
 #define _mm_extract_epi64(r, i) r.m128i_i64[i]
 #else
-// Ìí¼Ó²¿·ÖgccÖĞÈ±ÉÙµÄavxº¯Êı¶¨Òå
+// æ·»åŠ éƒ¨åˆ†gccä¸­ç¼ºå°‘çš„avxå‡½æ•°å®šä¹‰
 #define _mm256_set_m128i(/* __m128i */ hi, /* __m128i */ lo) \
             _mm256_insertf128_si256(_mm256_castsi128_si256(lo), (hi), 0x1)
 #define _mm256_loadu2_m128i(/* __m128i const* */ hiaddr, \

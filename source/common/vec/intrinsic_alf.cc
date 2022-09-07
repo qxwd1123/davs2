@@ -106,22 +106,22 @@ void alf_filter_block_sse128(pel_t *p_dst, const pel_t *p_src, int stride,
         imgPad5 = p_src + (yBottom - y) * stride;
         imgPad6 = p_src + (yUp     - y) * stride;
 
-        // ²âÊÔ176x144Ê±£¬V·ÖÁ¿³öÏÖ²»Æ¥Åä£¬¸ÄºóÆ¥Åä
+        // æµ‹è¯•176x144æ—¶ï¼ŒVåˆ†é‡å‡ºç°ä¸åŒ¹é…ï¼Œæ”¹ååŒ¹é…
         //for (x = lcu_pix_x; x < xPosEnd - 15; x += 16) {
         for (x = 0; x < lcu_width; x += 16) {
             T00 = _mm_loadu_si128((__m128i*)&imgPad6[x]);
             T01 = _mm_loadu_si128((__m128i*)&imgPad5[x]);
             E00 = _mm_unpacklo_epi8(T00, T01);
             E01 = _mm_unpackhi_epi8(T00, T01);
-            S00 = _mm_maddubs_epi16(E00, C0);//Ç°8¸öÏñËØËùÓĞC0*P0µÄ½á¹û
-            S01 = _mm_maddubs_epi16(E01, C0);//ºó8¸öÏñËØËùÓĞC0*P0µÄ½á¹û
+            S00 = _mm_maddubs_epi16(E00, C0);//å‰8ä¸ªåƒç´ æ‰€æœ‰C0*P0çš„ç»“æœ
+            S01 = _mm_maddubs_epi16(E01, C0);//å8ä¸ªåƒç´ æ‰€æœ‰C0*P0çš„ç»“æœ
 
             T10 = _mm_loadu_si128((__m128i*)&imgPad4[x]);
             T11 = _mm_loadu_si128((__m128i*)&imgPad3[x]);
             E10 = _mm_unpacklo_epi8(T10, T11);
             E11 = _mm_unpackhi_epi8(T10, T11);
-            S10 = _mm_maddubs_epi16(E10, C1);//Ç°8¸öÏñËØËùÓĞC1*P1µÄ½á¹û
-            S11 = _mm_maddubs_epi16(E11, C1);//ºó8¸öÏñËØËùÓĞC1*P1µÄ½á¹û
+            S10 = _mm_maddubs_epi16(E10, C1);//å‰8ä¸ªåƒç´ æ‰€æœ‰C1*P1çš„ç»“æœ
+            S11 = _mm_maddubs_epi16(E11, C1);//å8ä¸ªåƒç´ æ‰€æœ‰C1*P1çš„ç»“æœ
 
             T20 = _mm_loadu_si128((__m128i*)&imgPad2[x - 1]);
             T21 = _mm_loadu_si128((__m128i*)&imgPad1[x + 1]);
@@ -161,26 +161,26 @@ void alf_filter_block_sse128(pel_t *p_dst, const pel_t *p_src, int stride,
             S8  = _mm_maddubs_epi16(T4, C33);
             S50 = _mm_hadds_epi16(S5, S6);
             S51 = _mm_hadds_epi16(S7, S8);
-            S5  = _mm_hadds_epi16(S50, S51);//Ç°8¸ö
+            S5  = _mm_hadds_epi16(S50, S51);//å‰8ä¸ª
             S4  = _mm_maddubs_epi16(T5, C33);
             S6  = _mm_maddubs_epi16(T6, C33);
             S7  = _mm_maddubs_epi16(T7, C33);
             S8  = _mm_maddubs_epi16(T8, C33);
             S60 = _mm_hadds_epi16(S4, S6);
             S61 = _mm_hadds_epi16(S7, S8);
-            S6  = _mm_hadds_epi16(S60, S61);//ºó8¸ö
+            S6  = _mm_hadds_epi16(S60, S61);//å8ä¸ª
 
             S0  = _mm_adds_epi16(S00, S10);
             S1  = _mm_adds_epi16(S30, S20);
             S2  = _mm_adds_epi16(S40, S5);
             S3  = _mm_adds_epi16(S1, S0);
-            SS1 = _mm_adds_epi16(S2, S3);//Ç°8¸ö
+            SS1 = _mm_adds_epi16(S2, S3);//å‰8ä¸ª
 
             S0  = _mm_adds_epi16(S01, S11);
             S1  = _mm_adds_epi16(S31, S21);
             S2  = _mm_adds_epi16(S41, S6);
             S3  = _mm_adds_epi16(S1, S0);
-            SS2 = _mm_adds_epi16(S2, S3);//ºó8¸ö
+            SS2 = _mm_adds_epi16(S2, S3);//å8ä¸ª
 
 
             SS1 = _mm_adds_epi16(SS1, mAddOffset);

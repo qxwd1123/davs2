@@ -430,7 +430,7 @@ static void lf_scu_deblock(davs2_t *h, pel_t *p_dec[3], int stride, int stride_c
         b_filter_flag[1] = lf_skip_filter(h, scuP, scuQ, dir, (scu_x << 1) + dir, (scu_y << 1) + !dir);
 
         if (!b_filter_flag[0] && !b_filter_flag[1]) {
-            return;  // Èç¹ûÁ½¸ö8x4¶¼Ìø¹ýÂË²¨£¬Ôò²»ÐèÒª¼ÌÐøµ÷ÓÃºóÃæµÄº¯Êý
+            return;  // å¦‚æžœä¸¤ä¸ª8x4éƒ½è·³è¿‡æ»¤æ³¢ï¼Œåˆ™ä¸éœ€è¦ç»§ç»­è°ƒç”¨åŽé¢çš„å‡½æ•°
         }
 
         /* deblock luma edge */
@@ -572,7 +572,7 @@ void davs2_deblock_init(uint32_t cpuid, ao_funcs_t* fh)
     }
     if ((cpuid & DAVS2_CPU_AVX2) && !HDR_CHROMA_DELTA_QP) {
 #if !HIGH_BIT_DEPTH
-        // fh->deblock_luma[0] = deblock_edge_ver_avx2;  // @luofl i7-6700K ´Ëº¯ÊýÂýÓÚ sse128
+        // fh->deblock_luma[0] = deblock_edge_ver_avx2;  // @luofl i7-6700K æ­¤å‡½æ•°æ…¢äºŽ sse128
         // fh->deblock_luma[1] = deblock_edge_hor_avx2;
         // fh->deblock_chroma[0] = deblock_edge_ver_c_avx2;
         // fh->deblock_chroma[1] = deblock_edge_hor_c_avx2;

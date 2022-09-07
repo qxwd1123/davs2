@@ -2,7 +2,7 @@
  * test.c
  *
  * Description of this file:
- *    test the AVS2 Video Decoder ¡ª¡ª davs2 library
+ *    test the AVS2 Video Decoder â€”â€” davs2 library
  *
  * --------------------------------------------------------------------------
  *
@@ -61,7 +61,7 @@ extern "C" {
  * macro defines
  * ===========================================================================
  */
-#define CTRL_LOOP_DEC_FILE    0   /* Ñ­»·½âÂëÒ»¸öESÎÄ¼ş */
+#define CTRL_LOOP_DEC_FILE    0   /* å¾ªç¯è§£ç ä¸€ä¸ªESæ–‡ä»¶ */
 
 /* ---------------------------------------------------------------------------
  * disable warning C4100: : unreferenced formal parameter
@@ -188,7 +188,7 @@ void test_decoder(uint8_t *data_buf, int data_len, int num_frames, char *dst)
 #if CTRL_LOOP_DEC_FILE
     uint8_t *bak_data_buf = data_buf;
     int      bak_data_len = data_len;
-    int      num_loop     = 5;      // Ñ­»·½âÂë´ÎÊı
+    int      num_loop     = 5;      // å¾ªç¯è§£ç æ¬¡æ•°
 #endif
     int64_t time0, time1;
     void *decoder;

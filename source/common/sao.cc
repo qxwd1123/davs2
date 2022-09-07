@@ -463,7 +463,7 @@ void sao_get_neighbor_avail(davs2_t *h, sao_region_t *p_avail, int i_lcu_x, int 
     int width_c = width >> 1;
     int height_c = height >> 1;
 
-    /* ¿ÉÓÃÐÔ»ñÈ¡ */
+    /* å¯ç”¨æ€§èŽ·å– */
     p_avail->b_left = i_lcu_x != 0;
     p_avail->b_top  = i_lcu_y != 0;
     p_avail->b_right = (i_lcu_x < h->i_width_in_lcu - 1);
@@ -486,7 +486,7 @@ void sao_get_neighbor_avail(davs2_t *h, sao_region_t *p_avail, int i_lcu_x, int 
     p_avail->b_down_left = p_avail->b_down && p_avail->b_left;
     p_avail->b_right_down = p_avail->b_down && p_avail->b_right;
 
-    /* ÂË²¨ÇøÓòµÄµ÷Õû */
+    /* æ»¤æ³¢åŒºåŸŸçš„è°ƒæ•´ */
     if (!p_avail->b_right) {
         width += SAO_SHIFT_PIX_NUM;
         width_c += SAO_SHIFT_PIX_NUM;

@@ -64,8 +64,8 @@ cu_t *get_neighbor_cu_in_slice(davs2_t *h, cu_t *p_cur, int scu_x, int scu_y, in
 }
 
 /* ---------------------------------------------------------------------------
- * (x_4x4, y_4x4) - 相邻变换块的4x4地址（图像）
- * (scu_x, scu_y) - 当前CU的SCU地址（图像）
+ * (x_4x4, y_4x4) - 鐩搁偦鍙樻崲鍧楃殑4x4鍦板潃锛堝浘鍍忥級
+ * (scu_x, scu_y) - 褰撳墠CU鐨凷CU鍦板潃锛堝浘鍍忥級
  */
 int get_neighbor_cbp_y(davs2_t *h, int x_4x4, int y_4x4, int scu_x, int scu_y, cu_t *p_cu)
 {
@@ -74,7 +74,7 @@ int get_neighbor_cbp_y(davs2_t *h, int x_4x4, int y_4x4, int scu_x, int scu_y, c
     if (p_neighbor == NULL) {
         return 0;
     } else if (p_neighbor->i_trans_size == TU_SPLIT_NON) {
-        return p_neighbor->i_cbp & 1;   // TU不划分时，直接返回对应亮度块CBP
+        return p_neighbor->i_cbp & 1;   // TU涓嶅垝鍒嗘椂锛岀洿鎺ヨ繑鍥炲搴斾寒搴﹀潡CBP
     } else {
         int cbp     = p_neighbor->i_cbp;
         int level   = p_neighbor->i_cu_level - MIN_PU_SIZE_IN_BIT;
@@ -83,13 +83,13 @@ int get_neighbor_cbp_y(davs2_t *h, int x_4x4, int y_4x4, int scu_x, int scu_y, c
         x_4x4 &= cu_mask;
         y_4x4 &= cu_mask;
 
-        if (p_neighbor->i_trans_size == TU_SPLIT_VER) {           // 垂直划分
+        if (p_neighbor->i_trans_size == TU_SPLIT_VER) {           // 鍨傜洿鍒掑垎
             x_4x4 >>= (level - 2);
             return (cbp >> x_4x4) & 1;
-        } else if (p_neighbor->i_trans_size == TU_SPLIT_HOR) {    // 水平划分
+        } else if (p_neighbor->i_trans_size == TU_SPLIT_HOR) {    // 姘村钩鍒掑垎
             y_4x4 >>= (level - 2);
             return (cbp >> y_4x4) & 1;
-        } else {                                                  // 四叉划分
+        } else {                                                  // 鍥涘弶鍒掑垎
             x_4x4 >>= (level - 1);
             y_4x4 >>= (level - 1);
             return (cbp >> (x_4x4 + (y_4x4 << 1))) & 1;

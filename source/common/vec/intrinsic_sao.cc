@@ -41,7 +41,7 @@
 #include <smmintrin.h>
 
 #ifdef _MSC_VER
-#pragma warning(disable:4244)  // TODO: ÐÞÕý±àÒëwarning
+#pragma warning(disable:4244)  // TODO: ä¿®æ­£ç¼–è¯‘warning
 #endif
 
 #if !HIGH_BIT_DEPTH

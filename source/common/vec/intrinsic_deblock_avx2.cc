@@ -623,7 +623,7 @@ void deblock_edge_hor_avx2(pel_t *SrcPtr, int stride, int Alpha, int Beta, uint8
 
 }
 
-//ĞèÒªĞŞ¸Ä±äÁ¿  ĞŞ¸Ä±äÁ¿   i32s_tÎªint32_t;£¨signed int£©
+//éœ€è¦ä¿®æ”¹å˜é‡  ä¿®æ”¹å˜é‡   i32s_tä¸ºint32_t;ï¼ˆsigned intï¼‰
 void deblock_edge_hor_c_avx2(pel_t *SrcPtrU, pel_t *SrcPtrV, int stride, int Alpha, int Beta, uint8_t *flt_flag)
 {
     int inc = stride;

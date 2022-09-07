@@ -120,7 +120,7 @@ typedef struct ao_funcs_t {
     block_intpl_t       block_intpl_luma_ver[MAX_PART_NUM];
     block_intpl_ext_t   block_intpl_luma_ext[MAX_PART_NUM];
 #endif
-    intpl_t         intpl_luma_ver[2][3];//[2]:¸ù¾İ¿é´óĞ¡½øĞĞº¯Êı²ğ·Ö£¨0:size<=8   1:size>=16£©     [3]:¸ù¾İÈ¨ÖØÏµÊı½øĞĞ²ğ·Ö
+    intpl_t         intpl_luma_ver[2][3];//[2]:æ ¹æ®å—å¤§å°è¿›è¡Œå‡½æ•°æ‹†åˆ†ï¼ˆ0:size<=8   1:size>=16ï¼‰     [3]:æ ¹æ®æƒé‡ç³»æ•°è¿›è¡Œæ‹†åˆ†
     intpl_t         intpl_luma_hor[2][3];
     intpl_ext_t     intpl_luma_ext[2];
 

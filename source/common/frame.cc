@@ -381,7 +381,7 @@ void davs2_frame_copy_planes(davs2_frame_t *p_dst, davs2_frame_t *p_src)
 
     /* copy all plane data */
 #if 1
-    /* 使用对齐地址的内存拷贝，进行一次大数据量地拷贝 */
+    /* 浣跨敤瀵归綈鍦板潃鐨勫唴瀛樻嫹璐濓紝杩涜涓�娆″ぇ鏁版嵁閲忓湴鎷疯礉 */
     assert(p_src->i_stride[0] == p_dst->i_stride[0]);
     assert(p_src->i_stride[1] == p_dst->i_stride[1]);
     assert(p_src->i_stride[2] == p_dst->i_stride[2]);

@@ -43,7 +43,7 @@
  * macros
  * ===========================================================================
  */
-#define CTRL_OPT_AEC                       1  /* ÊÇ·ñ²ÉÓÃ»ùÓÚ²é±íµÄAECÉÏÏÂÎÄ×´Ì¬¸üĞÂ */
+#define CTRL_OPT_AEC                       1  /* æ˜¯å¦é‡‡ç”¨åŸºäºæŸ¥è¡¨çš„AECä¸Šä¸‹æ–‡çŠ¶æ€æ›´æ–° */
 #define MAKE_CONTEXT(lg_pmps, mps, cycno)  (((uint16_t)(cycno) << 0) | ((uint16_t)(mps) << 2) | (uint16_t)(lg_pmps << 3))
 
 /**
@@ -171,7 +171,7 @@ int aec_get_next_bit(aec_t *p_aec)
             p_aec->i_bits_to_go = 63;
             p_aec->i_byte_pos += 8;
         } else if (diff > 0) {
-            /* Ò»Ö¡Ê£ÓàÂëÁ÷³¤¶ÈĞ¡ÓÚ8£¬ÕâÔÚÒ»Ö¡Í¼Ïñ½âÂë¹ı³ÌÖĞÖ»³öÏÖÒ»´Î */
+            /* ä¸€å¸§å‰©ä½™ç æµé•¿åº¦å°äº8ï¼Œè¿™åœ¨ä¸€å¸§å›¾åƒè§£ç è¿‡ç¨‹ä¸­åªå‡ºç°ä¸€æ¬¡ */
             int i;
             p_aec->i_bits_to_go += (int8_t)(diff << 3);
             p_aec->i_byte_pos += (p_aec->i_bits_to_go + 1) >> 3;
@@ -543,7 +543,7 @@ int biari_decode_final(aec_t *p_aec)
     s2 = p_aec->i_s1 + s_flag;
     t2 = p_aec->i_t1 - lg_pmps + (s_flag << 8);            // 8bits
 
-    /* ·µ»ØÖµ */
+    /* è¿”å›å€¼ */
     is_LPS = (s2 > p_aec->i_value_s || (s2 == p_aec->i_value_s && p_aec->i_value_t >= t2)) && p_aec->b_val_bound == 0;
     p_aec->b_val_domain = (bool_t)is_LPS;
 
@@ -586,7 +586,7 @@ int biari_decode_final(aec_t *p_aec)
 
 /* ---------------------------------------------------------------------------
  * decode symbols until a zero bit is obtained or passed max_num symbols
- * Ê¹ÓÃÏàÍ¬ÉÏÏÂÎÄ½âÂë¶à¸ö·ûºÅ£¬Ö±ÖÁ½âÂë³ö0»òÕß´ïµ½×î´óÊıÁ¿(max_num)
+ * ä½¿ç”¨ç›¸åŒä¸Šä¸‹æ–‡è§£ç å¤šä¸ªç¬¦å·ï¼Œç›´è‡³è§£ç å‡º0æˆ–è€…è¾¾åˆ°æœ€å¤§æ•°é‡(max_num)
  */
 static INLINE
 int biari_decode_symbol_continue0(aec_t *p_aec, context_t *ctx, int max_num)
@@ -810,13 +810,13 @@ int aec_read_dmh_mode(aec_t *p_aec, int i_cu_level)
         return 0;
     } else {
         if (biari_decode_symbol(p_aec, p_ctx + 1) == 0) {
-            return 3 + biari_decode_symbol_eq_prob(p_aec);    // 3, 4: ¶şÔª·ûºÅ´®£º10x
+            return 3 + biari_decode_symbol_eq_prob(p_aec);    // 3, 4: äºŒå…ƒç¬¦å·ä¸²ï¼š10x
         } else {
             if (biari_decode_symbol(p_aec, p_ctx + 2) == 0) {
-                return 7 + biari_decode_symbol_eq_prob(p_aec);    // 7, 8: ¶şÔª·ûºÅ´®£º110x
+                return 7 + biari_decode_symbol_eq_prob(p_aec);    // 7, 8: äºŒå…ƒç¬¦å·ä¸²ï¼š110x
             } else {
-                /* 1,2£¬¶şÔª·ûºÅ´®£º1110x
-                 * 5,6£¬¶şÔª·ûºÅ´®£º1111x
+                /* 1,2ï¼ŒäºŒå…ƒç¬¦å·ä¸²ï¼š1110x
+                 * 5,6ï¼ŒäºŒå…ƒç¬¦å·ä¸²ï¼š1111x
                  */
                 int b3 = biari_decode_symbol_eq_prob(p_aec);
                 int b4 = biari_decode_symbol_eq_prob(p_aec);
@@ -1266,17 +1266,17 @@ static INLINE void cu_set_pdir_PFframe(cu_t *p_cu, int pdir)
     int i;
 
     if (i_cu_type == PRED_2Nx2N) { // 16x16
-        /* PU²»»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª 1£»[2/3]±ØĞë¸³ÖµÒÔ¼ò»¯DMHÄ£Ê½ºÅ½âÂëµÄÌõ¼şÅĞ¶Ï */
+        /* PUä¸åˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º 1ï¼›[2/3]å¿…é¡»èµ‹å€¼ä»¥ç®€åŒ–DMHæ¨¡å¼å·è§£ç çš„æ¡ä»¶åˆ¤æ–­ */
         pdir = (pdir == PDIR_FWD ? PDIR_FWD : PDIR_DUAL);
         for (i = 0; i < 4; i++) {
             p_cu->b8pdir[i] = (int8_t)pdir;
         }
     } else if (IS_HOR_PU_PART(i_cu_type)) { // horizontal: 16x8, 16x4, 16x12
-        /* Ë®Æ½PU»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª2£»[2/3]±ØĞë¸³ÖµÒÔ¼ò»¯DMHÄ£Ê½ºÅ½âÂëµÄÌõ¼şÅĞ¶Ï */
+        /* æ°´å¹³PUåˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º2ï¼›[2/3]å¿…é¡»èµ‹å€¼ä»¥ç®€åŒ–DMHæ¨¡å¼å·è§£ç çš„æ¡ä»¶åˆ¤æ–­ */
         p_cu->b8pdir[0] = p_cu->b8pdir[2] = pdir0[pdir];
         p_cu->b8pdir[1] = p_cu->b8pdir[3] = pdir1[pdir];
     } else if (IS_VER_PU_PART(i_cu_type)) { // vertical:
-        /* ´¹Ö±PU»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª2£»[2/3]±ØĞë¸³ÖµÒÔ¼ò»¯DMHÄ£Ê½ºÅ½âÂëµÄÌõ¼şÅĞ¶Ï */
+        /* å‚ç›´PUåˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º2ï¼›[2/3]å¿…é¡»èµ‹å€¼ä»¥ç®€åŒ–DMHæ¨¡å¼å·è§£ç çš„æ¡ä»¶åˆ¤æ–­ */
         p_cu->b8pdir[0] = p_cu->b8pdir[2] = pdir0[pdir];
         p_cu->b8pdir[1] = p_cu->b8pdir[3] = pdir1[pdir];
     } else {  /* intra mode */
@@ -1305,22 +1305,22 @@ static INLINE void cu_set_pdir_Bframe(cu_t *p_cu, int pdir)
 
     //--- set b8type, and b8pdir ---
     if (i_cu_type == PRED_SKIP) {   // direct
-        /* SkipÄ£Ê½ÏÂPUÊıÁ¿Îª1»ò4£¬°´ÕÕ×î´óPUÊıÁ¿ÉèÖÃ */
+        /* Skipæ¨¡å¼ä¸‹PUæ•°é‡ä¸º1æˆ–4ï¼ŒæŒ‰ç…§æœ€å¤§PUæ•°é‡è®¾ç½® */
         pdir = tab_pdir_bskip[p_cu->i_md_directskip_mode];
         for (i = 0; i < 4; i++) {
             b8pdir[i] = (int8_t)pdir;
         }
     } else if (i_cu_type == PRED_2Nx2N) { // 16x16
-        /* PU²»»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª 1 */
+        /* PUä¸åˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º 1 */
         for (i = 0; i < 4; i++) {
             b8pdir[i] = (int8_t)pdir;
         }
     } else if (IS_HOR_PU_PART(i_cu_type)) { // 16x8, 16x4, 16x12
-        /* Ë®Æ½PU»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª2 */
+        /* æ°´å¹³PUåˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º2 */
         b8pdir[0] = b8pdir[2] = pdir0[pdir];
         b8pdir[1] = b8pdir[3] = pdir1[pdir];
     } else if (IS_VER_PU_PART(i_cu_type)) {
-        /* ´¹Ö±PU»®·ÖÇé¿öÏÂ£¬PUÊıÁ¿Îª2 */
+        /* å‚ç›´PUåˆ’åˆ†æƒ…å†µä¸‹ï¼ŒPUæ•°é‡ä¸º2 */
         b8pdir[0] = b8pdir[2] = pdir0[pdir];
         b8pdir[1] = b8pdir[3] = pdir1[pdir];
     } else {  // intra mode
@@ -1351,7 +1351,7 @@ int aec_read_ref_frame(aec_t *p_aec, int num_of_references)
         int act_ctx = 1;
         act_sym = 1;
 
-        // TODO: ´Ë´¦´úÂë¿É¼ÌĞøÓÅ»¯
+        // TODO: æ­¤å¤„ä»£ç å¯ç»§ç»­ä¼˜åŒ–
         while ((act_sym != num_of_references - 1) && (!biari_decode_symbol(p_aec, p_ctx + act_ctx))) {
             act_sym++;
             act_ctx = DAVS2_MIN(2, act_ctx + 1);
@@ -1475,7 +1475,7 @@ int aec_read_cu_delta_qp(aec_t * p_aec, int i_last_dequant)
         act_sym = unary_bin_max_decode(p_aec, p_ctx + 2, 1, 256) + 1;
     }
 
-    /* cu_qp_delta: (-32  -  4¡Á (BitDepth-8)) ¡«(32  + 4¡Á (BitDepth -8)) */
+    /* cu_qp_delta: (-32  -  4Ã— (BitDepth-8)) ï½(32  + 4Ã— (BitDepth -8)) */
     dquant = (act_sym + 1) >> 1;
     if ((act_sym & 0x01) == 0) {    // LSB is signed bit
         dquant = -dquant;
@@ -1501,7 +1501,7 @@ static int aec_read_ctp_y(davs2_t *h, aec_t *p_aec, int b8, cu_t *p_cu, int scu_
     int a = 0, b = 0;                   // ctp_y[i] of neighboring blocks
     int x, y;
 
-    /* µ±Ç°TBÔÚCUÖĞµÄÎ»ÖÃ */
+    /* å½“å‰TBåœ¨CUä¸­çš„ä½ç½® */
     if (b_hor) {
         x = 0;
         y = ((cu_size * b8) >> 2);
@@ -1513,21 +1513,21 @@ static int aec_read_ctp_y(davs2_t *h, aec_t *p_aec, int b8, cu_t *p_cu, int scu_
         y = ((cu_size * (b8 >> 1)) >> 1);
     }
 
-    /* TBÔÚÍ¼ÏñÖĞµÄÎ»ÖÃ */
+    /* TBåœ¨å›¾åƒä¸­çš„ä½ç½® */
     x += (scu_x << MIN_CU_SIZE_IN_BIT);
     y += (scu_y << MIN_CU_SIZE_IN_BIT);
-    /* ×ª»»³É4x4¿éÎ»ÖÃ */
+    /* è½¬æ¢æˆ4x4å—ä½ç½® */
     x >>= MIN_PU_SIZE_IN_BIT;
     y >>= MIN_PU_SIZE_IN_BIT;
 
-    /* È¡×óÏàÁÚ¿é¶ÔÓ¦Î»ÖÃµÄCTP */
+    /* å–å·¦ç›¸é‚»å—å¯¹åº”ä½ç½®çš„CTP */
     if (b_ver && b8 > 0) {
         a = (p_cu->i_cbp >> (b8 - 1)) & 1;
     } else {
         a = get_neighbor_cbp_y(h, x - 1, y, scu_x, scu_y, p_cu);
     }
 
-    /* È¡ÉÏÏàÁÚ¿é¶ÔÓ¦Î»ÖÃµÄCTP */
+    /* å–ä¸Šç›¸é‚»å—å¯¹åº”ä½ç½®çš„CTP */
     if (b_hor && b8 > 0) {
         b = (p_cu->i_cbp >> (b8 - 1)) & 1;
     } else {
@@ -1574,7 +1574,7 @@ int aec_read_cbp(aec_t *p_aec, davs2_t *h, cu_t *p_cu, int scu_x, int scu_y)
             // luma
             if (b_tu_split == 0) {
                 if (cbp == 0) {
-                    cbp = 1;   // É«¶È¿éÈ«Áã£¬ctp_zero_flagÖ¸Ê¾ÓĞ·ÇÁãÏµÊı
+                    cbp = 1;   // è‰²åº¦å—å…¨é›¶ï¼Œctp_zero_flagæŒ‡ç¤ºæœ‰éé›¶ç³»æ•°
                 } else {
                     cbp_bit = aec_read_ctp_y(h, p_aec, 0, p_cu, scu_x, scu_y);
                     cbp    += cbp_bit;
@@ -1636,7 +1636,7 @@ int aec_read_cbp(aec_t *p_aec, davs2_t *h, cu_t *p_cu, int scu_x, int scu_y)
                     cbp += 16 << cbp_bit;
                 }
             }
-        }   // É«¶ÈCBP
+        }   // è‰²åº¦CBP
     }
 
     if (!cbp) {
@@ -1803,14 +1803,14 @@ int aec_read_last_coeff_pos_in_cg(aec_t *p_aec, context_t *p_ctx,
     int xx, yy;
     int offset;
 
-    /* AVS2-P2¹ú±ê: 8.3.3.2.14   È·¶¨last_coeff_pos_x »òlast_coeff_pos_y µÄctxIdxInc */
-    if (b_luma == 0) {                    // É«¶È·ÖÁ¿¹²Õ¼ÓÃ12¸öÉÏÏÂÎÄ
+    /* AVS2-P2å›½æ ‡: 8.3.3.2.14   ç¡®å®šlast_coeff_pos_x æˆ–last_coeff_pos_y çš„ctxIdxInc */
+    if (b_luma == 0) {                    // è‰²åº¦åˆ†é‡å…±å ç”¨12ä¸ªä¸Šä¸‹æ–‡
         offset = b_one_cg ? 0 : 4 + (rank == 0) * 4;
-    } else if (b_one_cg) {                // Log2TransformSize Îª 2£¬Õ¼ÓÃ8¸öÉÏÏÂÎÄ
+    } else if (b_one_cg) {                // Log2TransformSize ä¸º 2ï¼Œå ç”¨8ä¸ªä¸Šä¸‹æ–‡
         offset = 40 + is_dc_diag * 4;
-    } else if (cg_x != 0 && cg_y != 0) {  // cg_x ºÍ cg_y ¾ù²»ÎªÁã£¬Õ¼ÓÃ8¸öÉÏÏÂÎÄ
+    } else if (cg_x != 0 && cg_y != 0) {  // cg_x å’Œ cg_y å‡ä¸ä¸ºé›¶ï¼Œå ç”¨8ä¸ªä¸Šä¸‹æ–‡
         offset = 32 + (rank == 0) * 4;
-    } else {                              // ÆäËûÁÁ¶ÈÎ»ÖÃÕ¼ÓÃ40¸öÉÏÏÂÎÄ
+    } else {                              // å…¶ä»–äº®åº¦ä½ç½®å ç”¨40ä¸ªä¸Šä¸‹æ–‡
         offset = (4 * (rank == 0) + 2 * (cg_x == 0 && cg_y == 0) + is_dc_diag) * 4;
     }
 
@@ -1871,7 +1871,7 @@ int aec_read_run_luma1(aec_t *p_aec, context_t *p_ctx, int pos, int b_only_one_c
 
     for (ctxpos = 0; Run != pos; ctxpos++) {
         if (ctxpos < pos) {
-            int moddiv; // 0£¬1£¬2
+            int moddiv; // 0ï¼Œ1ï¼Œ2
             moddiv = (tab_scan_4x4[pos - 1 - ctxpos][1] + 1) >> 1;
             offset = (b_1st_cg ? (pos == ctxpos + 1 ? 0 : (1 + moddiv)) : (4 + moddiv)) + b_only_one_cg;  // 0,...,10
         }
@@ -1900,7 +1900,7 @@ int aec_read_run_luma2(aec_t *p_aec, context_t *p_ctx, int pos, int b_only_one_c
     
     for (ctxpos = 0; Run != pos; ctxpos++) {
         if (ctxpos < pos) {
-            int moddiv; // 0£¬1£¬2
+            int moddiv; // 0ï¼Œ1ï¼Œ2
             moddiv = ((pos < ctxpos + 4) ? 0 : (pos < ctxpos + 11 ? 1 : 2));
             offset = (b_1st_cg ? (pos == ctxpos + 1 ? 0 : (1 + moddiv)) : (4 + moddiv)) + b_only_one_cg;  // 0,...,10
         }
@@ -1996,7 +1996,7 @@ int aec_read_run_level(aec_t *p_aec, cu_t *p_cu, int num_cg, int b_luma, int is_
         w_tr_quad = w_tr >> 0;
         h_tr_quad = h_tr >> 2;
     }
-    /* ×ª»»³ÉCGÎ»ÖÃË÷ÒıµÄ±ß½çÎ»ÖÃ */
+    /* è½¬æ¢æˆCGä½ç½®ç´¢å¼•çš„è¾¹ç•Œä½ç½® */
     w_tr_half >>= 2;
     h_tr_half >>= 2;
     w_tr_quad >>= 2;
@@ -2126,7 +2126,7 @@ int aec_read_run_level(aec_t *p_aec, cu_t *p_cu, int num_cg, int b_luma, int is_
                     DAVS2_SWAP(CGx, CGy);
                 }
                 p_res += i_coeff * (CGy << 2) + (CGx << 2);
-                // ½«RunLevel×ª»»³ÉCGÄÚµÄ·ÇÁãÏµÊı
+                // å°†RunLevelè½¬æ¢æˆCGå†…çš„éé›¶ç³»æ•°
                 while (num_pairs > 0) {  /* leave if len=1 */
                     int x_in_cg, y_in_cg;
 

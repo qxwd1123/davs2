@@ -366,7 +366,7 @@ void intra_pred_bilinear_sse128(pel_t *src, pel_t *dst, int i_dst, int dir_mode,
     __m128i T, T1, T2, T3, C1, C2, ADD;
     __m128i ZERO = _mm_setzero_si128();
 
-    /* TODO: ÎªÊ²Ã´Õâ¼¸¸öÊı×éµÄ´óĞ¡ĞèÒªÔö¼Óµ½ 32£¬ÊÇ·ñÓĞ±ØÒª£¿ */
+    /* TODO: ä¸ºä»€ä¹ˆè¿™å‡ ä¸ªæ•°ç»„çš„å¤§å°éœ€è¦å¢åŠ åˆ° 32ï¼Œæ˜¯å¦æœ‰å¿…è¦ï¼Ÿ */
     ALIGN32(itr_t pTop [MAX_CU_SIZE + 32]);
     ALIGN32(itr_t pLeft[MAX_CU_SIZE + 32]);
     ALIGN32(itr_t pT   [MAX_CU_SIZE + 32]);
@@ -6828,7 +6828,7 @@ void intra_pred_ang_xy_14_sse128(pel_t *src, pel_t *dst, int i_dst, int dir_mode
             ((int*)&pfirst[3][i])[0] = _mm_cvtsi128_si32(p00);
         }
 
-        if (i < left_size) { //Ê¹ÓÃcÓïÑÔ¿ÉÄÜ»á¸üÓÅ
+        if (i < left_size) { //ä½¿ç”¨cè¯­è¨€å¯èƒ½ä¼šæ›´ä¼˜
             __m128i p00, p01, p10;
             __m128i p20, p30;
             __m128i S0 = _mm_loadu_si128((__m128i*)(src - 1));

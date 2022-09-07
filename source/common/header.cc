@@ -897,7 +897,7 @@ int create_dpb(davs2_mgr_t *mgr)
     int i;
 
     mgr->dpbsize = mgr->num_decoders + seq->picture_reorder_delay + 16;  /// !!! FIXME: decide dpb buffer size ?
-    mgr->dpbsize += 8;  // FIXME: ÐèÒª¼õÉÙ
+    mgr->dpbsize += 8;  // FIXME: éœ€è¦å‡å°‘
 
     mem_size = mgr->dpbsize * sizeof(davs2_frame_t *)
         + davs2_frame_get_size(seq->i_enc_width, seq->i_enc_height, seq->head.chroma_format, 1) * mgr->dpbsize
