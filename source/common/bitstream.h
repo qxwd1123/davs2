@@ -43,17 +43,19 @@ void bs_init(davs2_bs_t *bs, uint8_t *p_data, int i_data);
 #define bs_align FPFX(bs_align)
 void bs_align(davs2_bs_t *bs);
 #define bs_left_bytes FPFX(bs_left_bytes)
-int  bs_left_bytes(davs2_bs_t *bs);
+int bs_left_bytes(davs2_bs_t *bs);
 #define found_slice_header FPFX(found_slice_header)
-int  found_slice_header(davs2_bs_t *bs);
+int found_slice_header(davs2_bs_t *bs);
 #define bs_get_start_code FPFX(bs_get_start_code)
-int  bs_get_start_code(davs2_bs_t *bs);
+int bs_get_start_code(davs2_bs_t *bs);
 #define bs_dispose_pseudo_code FPFX(bs_dispose_pseudo_code)
-int  bs_dispose_pseudo_code(uint8_t *dst, uint8_t *src, int i_src);
+int bs_dispose_pseudo_code(uint8_t *dst, uint8_t *src, int i_src);
 #define find_start_code FPFX(find_start_code)
-const uint8_t * find_start_code(const uint8_t *data, int len);
+const uint8_t *find_start_code(const uint8_t *data, int len);
 #define find_pic_start_code FPFX(find_pic_start_code)
-int32_t find_pic_start_code(uint8_t prevbyte3, uint8_t prevbyte2, uint8_t prevbyte1, const uint8_t *data, int32_t len);
+int32_t find_pic_start_code(uint8_t prevbyte3, uint8_t prevbyte2,
+                            uint8_t prevbyte1, const uint8_t *data,
+                            int32_t len);
 
 #ifdef __cplusplus
 }

@@ -49,22 +49,25 @@ extern "C" {
 #endif
 
 typedef struct {
-    void *handle;
-    void *(*func)(void *arg);
-    void *arg;
-    void *ret;
+  void *handle;
+  void *(*func)(void *arg);
+  void *arg;
+  void *ret;
 } davs2_thread_t;
 #define davs2_thread_attr_t int
 
-/* the conditional variable api for windows 6.0+ uses critical sections and not mutexes */
+/* the conditional variable api for windows 6.0+ uses critical sections and not
+ * mutexes */
 typedef CRITICAL_SECTION davs2_thread_mutex_t;
-#define DAVS2_THREAD_MUTEX_INITIALIZER {0}
+#define DAVS2_THREAD_MUTEX_INITIALIZER \
+  { 0 }
 #define davs2_thread_mutexattr_t int
 #define pthread_exit(a)
-/* This is the CONDITIONAL_VARIABLE typedef for using Window's native conditional variables on kernels 6.0+.
- * MinGW does not currently have this typedef. */
+/* This is the CONDITIONAL_VARIABLE typedef for using Window's native
+ * conditional variables on kernels 6.0+. MinGW does not currently have this
+ * typedef. */
 typedef struct {
-    void *ptr;
+  void *ptr;
 } davs2_thread_cond_t;
 #define davs2_thread_condattr_t int
 
@@ -75,7 +78,8 @@ int davs2_thread_create(davs2_thread_t *thread, const davs2_thread_attr_t *attr,
 int davs2_thread_join(davs2_thread_t thread, void **value_ptr);
 
 #define davs2_thread_mutex_init FPFX(thread_mutex_init)
-int davs2_thread_mutex_init(davs2_thread_mutex_t *mutex, const davs2_thread_mutexattr_t *attr);
+int davs2_thread_mutex_init(davs2_thread_mutex_t *mutex,
+                            const davs2_thread_mutexattr_t *attr);
 #define davs2_thread_mutex_destroy FPFX(thread_mutex_destroy)
 int davs2_thread_mutex_destroy(davs2_thread_mutex_t *mutex);
 #define davs2_thread_mutex_lock FPFX(thread_mutex_lock)
@@ -84,13 +88,15 @@ int davs2_thread_mutex_lock(davs2_thread_mutex_t *mutex);
 int davs2_thread_mutex_unlock(davs2_thread_mutex_t *mutex);
 
 #define davs2_thread_cond_init FPFX(thread_cond_init)
-int davs2_thread_cond_init(davs2_thread_cond_t *cond, const davs2_thread_condattr_t *attr);
+int davs2_thread_cond_init(davs2_thread_cond_t *cond,
+                           const davs2_thread_condattr_t *attr);
 #define davs2_thread_cond_destroy FPFX(thread_cond_destroy)
 int davs2_thread_cond_destroy(davs2_thread_cond_t *cond);
 #define davs2_thread_cond_broadcast FPFX(thread_cond_broadcast)
 int davs2_thread_cond_broadcast(davs2_thread_cond_t *cond);
 #define davs2_thread_cond_wait FPFX(thread_cond_wait)
-int davs2_thread_cond_wait(davs2_thread_cond_t *cond, davs2_thread_mutex_t *mutex);
+int davs2_thread_cond_wait(davs2_thread_cond_t *cond,
+                           davs2_thread_mutex_t *mutex);
 #define davs2_thread_cond_signal FPFX(thread_cond_signal)
 int davs2_thread_cond_signal(davs2_thread_cond_t *cond);
 
@@ -98,7 +104,7 @@ int davs2_thread_cond_signal(davs2_thread_cond_t *cond);
 #define davs2_thread_attr_destroy(a) 0
 
 #define davs2_win32_threading_init FPFX(win32_threading_init)
-int  davs2_win32_threading_init(void);
+int davs2_win32_threading_init(void);
 #define davs2_win32_threading_destroy FPFX(win32_threading_destroy)
 void davs2_win32_threading_destroy(void);
 

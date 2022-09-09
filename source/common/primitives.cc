@@ -30,7 +30,6 @@
  *    For more information, contact us at sswang @ pku.edu.cn.
  */
 
-
 #include "common.h"
 #include "primitives.h"
 #include "cpu.h"
@@ -44,30 +43,28 @@
 
 /* ---------------------------------------------------------------------------
  */
-ao_funcs_t gf_davs2 = {0};
+ao_funcs_t gf_davs2 = { 0 };
 
 /* ---------------------------------------------------------------------------
  */
-void init_all_primitives(uint32_t cpuid)
-{
-    if (gf_davs2.initial_count != 0) {
-        // already initialed
-        gf_davs2.initial_count++;
-        return;
-    }
+void init_all_primitives(uint32_t cpuid) {
+  if (gf_davs2.initial_count != 0) {
+    // already initialed
+    gf_davs2.initial_count++;
+    return;
+  }
 
-    gf_davs2.initial_count = 1;
-    gf_davs2.cpuid         = cpuid;
+  gf_davs2.initial_count = 1;
+  gf_davs2.cpuid = cpuid;
 
-    /* init function handles */
-    davs2_memory_init    (cpuid, &gf_davs2);
-    davs2_intra_pred_init(cpuid, &gf_davs2);
-    davs2_pixel_init     (cpuid, &gf_davs2);
-    davs2_mc_init        (cpuid, &gf_davs2);
-    davs2_quant_init     (cpuid, &gf_davs2);
-    davs2_dct_init       (cpuid, &gf_davs2);
-    davs2_deblock_init   (cpuid, &gf_davs2);
-    davs2_sao_init       (cpuid, &gf_davs2);
-    davs2_alf_init       (cpuid, &gf_davs2);
-
+  /* init function handles */
+  davs2_memory_init(cpuid, &gf_davs2);
+  davs2_intra_pred_init(cpuid, &gf_davs2);
+  davs2_pixel_init(cpuid, &gf_davs2);
+  davs2_mc_init(cpuid, &gf_davs2);
+  davs2_quant_init(cpuid, &gf_davs2);
+  davs2_dct_init(cpuid, &gf_davs2);
+  davs2_deblock_init(cpuid, &gf_davs2);
+  davs2_sao_init(cpuid, &gf_davs2);
+  davs2_alf_init(cpuid, &gf_davs2);
 }

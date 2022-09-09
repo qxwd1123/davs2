@@ -29,16 +29,30 @@
 
 #if defined(__cplusplus)
 extern "C" {
-#endif  /* __cplusplus */
+#endif /* __cplusplus */
 
-#define SETUP_FUNC_DEF(cpu) \
-    FUNCDEF_PU(void, interp_8tap_horiz_pp, cpu, const pel_t* src, intptr_t srcStride, pel_t* dst, intptr_t dstStride, int coeffIdx); \
-    FUNCDEF_PU(void, interp_8tap_horiz_ps, cpu, const pel_t* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx, int isRowExt); \
-    FUNCDEF_PU(void, interp_8tap_vert_pp, cpu, const pel_t* src, intptr_t srcStride, pel_t* dst, intptr_t dstStride, int coeffIdx); \
-    FUNCDEF_PU(void, interp_8tap_vert_ps, cpu, const pel_t* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx); \
-    FUNCDEF_PU(void, interp_8tap_vert_sp, cpu, const int16_t* src, intptr_t srcStride, pel_t* dst, intptr_t dstStride, int coeffIdx); \
-    FUNCDEF_PU(void, interp_8tap_vert_ss, cpu, const int16_t* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx); \
-    FUNCDEF_PU(void, interp_8tap_hv_pp, cpu, const pel_t* src, intptr_t srcStride, pel_t* dst, intptr_t dstStride, int idxX, int idxY)
+#define SETUP_FUNC_DEF(cpu)                                                \
+  FUNCDEF_PU(void, interp_8tap_horiz_pp, cpu, const pel_t *src,            \
+             intptr_t srcStride, pel_t *dst, intptr_t dstStride,           \
+             int coeffIdx);                                                \
+  FUNCDEF_PU(void, interp_8tap_horiz_ps, cpu, const pel_t *src,            \
+             intptr_t srcStride, int16_t *dst, intptr_t dstStride,         \
+             int coeffIdx, int isRowExt);                                  \
+  FUNCDEF_PU(void, interp_8tap_vert_pp, cpu, const pel_t *src,             \
+             intptr_t srcStride, pel_t *dst, intptr_t dstStride,           \
+             int coeffIdx);                                                \
+  FUNCDEF_PU(void, interp_8tap_vert_ps, cpu, const pel_t *src,             \
+             intptr_t srcStride, int16_t *dst, intptr_t dstStride,         \
+             int coeffIdx);                                                \
+  FUNCDEF_PU(void, interp_8tap_vert_sp, cpu, const int16_t *src,           \
+             intptr_t srcStride, pel_t *dst, intptr_t dstStride,           \
+             int coeffIdx);                                                \
+  FUNCDEF_PU(void, interp_8tap_vert_ss, cpu, const int16_t *src,           \
+             intptr_t srcStride, int16_t *dst, intptr_t dstStride,         \
+             int coeffIdx);                                                \
+  FUNCDEF_PU(void, interp_8tap_hv_pp, cpu, const pel_t *src,               \
+             intptr_t srcStride, pel_t *dst, intptr_t dstStride, int idxX, \
+             int idxY)
 
 SETUP_FUNC_DEF(sse2);
 SETUP_FUNC_DEF(ssse3);
@@ -49,4 +63,4 @@ SETUP_FUNC_DEF(avx2);
 #if defined(__cplusplus)
 }
 #endif  /* __cplusplus */
-#endif // ifndef DAVS2_IPFILTER8_H
+#endif  // ifndef DAVS2_IPFILTER8_H

@@ -30,18 +30,16 @@
  *    For more information, contact us at sswang @ pku.edu.cn.
  */
 
-
 #ifndef DAVS2_CPU_H
 #define DAVS2_CPU_H
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
 #define davs2_cpu_detect FPFX(cpu_detect)
 uint32_t davs2_cpu_detect(void);
 #define davs2_cpu_num_processors FPFX(cpu_num_processors)
-int  davs2_cpu_num_processors(void);
+int davs2_cpu_num_processors(void);
 #define avs_cpu_emms FPFX(avs_cpu_emms)
 void avs_cpu_emms(void);
 #define avs_cpu_mask_misalign_sse FPFX(avs_cpu_mask_misalign_sse)
@@ -54,7 +52,8 @@ char *davs2_get_simd_capabilities(char *buf, uint32_t cpuid);
 
 #if HAVE_MMX
 #define davs2_cpu_cpuid FPFX(cpu_cpuid)
-uint32_t davs2_cpu_cpuid(uint32_t op, uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx);
+uint32_t davs2_cpu_cpuid(uint32_t op, uint32_t *eax, uint32_t *ebx,
+                         uint32_t *ecx, uint32_t *edx);
 #define davs2_cpu_xgetbv FPFX(cpu_xgetbv)
 void davs2_cpu_xgetbv(uint32_t op, uint32_t *eax, uint32_t *edx);
 #define avs_emms() avs_cpu_emms()
@@ -73,10 +72,10 @@ void davs2_cpu_xgetbv(uint32_t op, uint32_t *eax, uint32_t *edx);
  * This applies only to x86_32, since other architectures that need alignment
  * also have ABIs that ensure aligned stack. */
 #if ARCH_X86 && HAVE_MMX
-//int xavs_stack_align(void(*func) (xavs_t *), xavs_t * arg);
+// int xavs_stack_align(void(*func) (xavs_t *), xavs_t * arg);
 //#define avs_stack_align(func,arg) avs_stack_align((void (*)(xavs_t*))func,arg)
 #else
-#define avs_stack_align(func,...) func(__VA_ARGS__)
+#define avs_stack_align(func, ...) func(__VA_ARGS__)
 #endif
 
 #define avs_cpu_restore FPFX(avs_cpu_restore)

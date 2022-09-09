@@ -37,9 +37,10 @@ extern "C" {
 #endif
 
 #define get_neighbor_cbp_y FPFX(get_neighbor_cbp_y)
-int  get_neighbor_cbp_y(davs2_t *h, int xN, int yN, int scu_x, int scu_y, cu_t *p_cu);
+int get_neighbor_cbp_y(davs2_t *h, int xN, int yN, int scu_x, int scu_y,
+                       cu_t *p_cu);
 
 #ifdef __cplusplus
 }
 #endif
-#endif // DAVS2_BLOCK_INFO_H
+#endif  // DAVS2_BLOCK_INFO_H

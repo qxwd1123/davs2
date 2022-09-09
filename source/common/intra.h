@@ -35,29 +35,31 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 /* ---------------------------------------------------------------------------
  */
-static ALWAYS_INLINE
-void intra_pred(pel_t *src, pel_t *dst, int i_dst, int dir_mode, int bsy, int bsx, int i_avail)
-{
-    if (dir_mode != DC_PRED) {
-        gf_davs2.intraf[dir_mode](src, dst, i_dst, dir_mode, bsx, bsy);
-    } else {
-        int b_top  = !!IS_NEIGHBOR_AVAIL(i_avail, MD_I_TOP);
-        int b_left = !!IS_NEIGHBOR_AVAIL(i_avail, MD_I_LEFT);
-        int mode_ex = ((b_top << 8) + b_left);
+static ALWAYS_INLINE void intra_pred(pel_t *src, pel_t *dst, int i_dst,
+                                     int dir_mode, int bsy, int bsx,
+                                     int i_avail) {
+  if (dir_mode != DC_PRED) {
+    gf_davs2.intraf[dir_mode](src, dst, i_dst, dir_mode, bsx, bsy);
+  } else {
+    int b_top = !!IS_NEIGHBOR_AVAIL(i_avail, MD_I_TOP);
+    int b_left = !!IS_NEIGHBOR_AVAIL(i_avail, MD_I_LEFT);
+    int mode_ex = ((b_top << 8) + b_left);
 
-        gf_davs2.intraf[dir_mode](src, dst, i_dst, mode_ex, bsx, bsy);
-    }
+    gf_davs2.intraf[dir_mode](src, dst, i_dst, mode_ex, bsx, bsy);
+  }
 }
 
 #define davs2_intra_pred_init FPFX(intra_pred_init)
 void davs2_intra_pred_init(uint32_t cpuid, ao_funcs_t *pf);
 #define davs2_get_intra_pred FPFX(get_intra_pred)
-void davs2_get_intra_pred(davs2_row_rec_t *row_rec, cu_t *p_cu, int predmode, int ctu_x, int ctu_y, int bsx, int bsy);
+void davs2_get_intra_pred(davs2_row_rec_t *row_rec, cu_t *p_cu, int predmode,
+                          int ctu_x, int ctu_y, int bsx, int bsy);
 #define davs2_get_intra_pred_chroma FPFX(get_intra_pred_chroma)
-void davs2_get_intra_pred_chroma(davs2_row_rec_t *h, cu_t *p_cu, int ctu_c_x, int ctu_c_y);
+void davs2_get_intra_pred_chroma(davs2_row_rec_t *h, cu_t *p_cu, int ctu_c_x,
+                                 int ctu_c_y);
 
 #ifdef __cplusplus
 }

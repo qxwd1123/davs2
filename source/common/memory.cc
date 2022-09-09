@@ -39,44 +39,40 @@
 
 /* ---------------------------------------------------------------------------
  */
-void *memzero_aligned_c(void *dst, size_t n)
-{
-    return memset(dst, 0, n);
-}
+void *memzero_aligned_c(void *dst, size_t n) { return memset(dst, 0, n); }
 
 /* ---------------------------------------------------------------------------
  */
-void davs2_memory_init(uint32_t cpuid, ao_funcs_t* pf)
-{
-    /* memory copy */
-    pf->fast_memcpy      = memcpy;
-    pf->fast_memset      = memset;
-    pf->memcpy_aligned   = memcpy;
-    pf->fast_memzero     = memzero_aligned_c;
-    pf->memzero_aligned  = memzero_aligned_c;
+void davs2_memory_init(uint32_t cpuid, ao_funcs_t *pf) {
+  /* memory copy */
+  pf->fast_memcpy = memcpy;
+  pf->fast_memset = memset;
+  pf->memcpy_aligned = memcpy;
+  pf->fast_memzero = memzero_aligned_c;
+  pf->memzero_aligned = memzero_aligned_c;
 
-    /* init asm function handles */
+  /* init asm function handles */
 #if HAVE_MMX
-    if (cpuid & DAVS2_CPU_MMX) {
-        pf->fast_memcpy     = davs2_fast_memcpy_mmx;
-        pf->memcpy_aligned  = davs2_memcpy_aligned_mmx;
-        pf->fast_memset     = davs2_fast_memset_mmx;
-        pf->fast_memzero    = davs2_fast_memzero_mmx;
-        pf->memzero_aligned = davs2_fast_memzero_mmx;
-    }
+  if (cpuid & DAVS2_CPU_MMX) {
+    pf->fast_memcpy = davs2_fast_memcpy_mmx;
+    pf->memcpy_aligned = davs2_memcpy_aligned_mmx;
+    pf->fast_memset = davs2_fast_memset_mmx;
+    pf->fast_memzero = davs2_fast_memzero_mmx;
+    pf->memzero_aligned = davs2_fast_memzero_mmx;
+  }
 
-    if (cpuid & DAVS2_CPU_SSE) {
-        // pf->memcpy_aligned  = davs2_memcpy_aligned_sse;
-        // pf->memzero_aligned = davs2_memzero_aligned_sse;
-    }
+  if (cpuid & DAVS2_CPU_SSE) {
+    // pf->memcpy_aligned  = davs2_memcpy_aligned_sse;
+    // pf->memzero_aligned = davs2_memzero_aligned_sse;
+  }
 
-    if (cpuid & DAVS2_CPU_SSE2) {
-        pf->memzero_aligned = davs2_memzero_aligned_c_sse2;
-        // gf_davs2.memcpy_aligned  = davs2_memcpy_aligned_c_sse2;
-    }
+  if (cpuid & DAVS2_CPU_SSE2) {
+    pf->memzero_aligned = davs2_memzero_aligned_c_sse2;
+    // gf_davs2.memcpy_aligned  = davs2_memcpy_aligned_c_sse2;
+  }
 
-    if (cpuid & DAVS2_CPU_AVX2) {
-        pf->memzero_aligned = davs2_memzero_aligned_c_avx;
-    }
-#endif // HAVE_MMX
+  if (cpuid & DAVS2_CPU_AVX2) {
+    pf->memzero_aligned = davs2_memzero_aligned_c_avx;
+  }
+#endif  // HAVE_MMX
 }

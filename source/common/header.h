@@ -39,7 +39,7 @@ extern "C" {
 #define parse_slice_header FPFX(parse_slice_header)
 void parse_slice_header(davs2_t *h, davs2_bs_t *bs);
 #define parse_header FPFX(parse_header)
-int  parse_header(davs2_t *h, davs2_bs_t *p_bs);
+int parse_header(davs2_t *h, davs2_bs_t *p_bs);
 
 #define release_one_frame FPFX(release_one_frame)
 void release_one_frame(davs2_frame_t *frame);
